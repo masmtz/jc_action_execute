@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <act_window 
+        name="Cambiar fechas 4013"
+        res_model="change.date.4013.wizard"
+        view_mode="form"
+        target="new"
+        id="wizard_change_date_4013_action"
+        src_model="prodigia.mrp.production.jc"
+        key2="client_action_multi"
+       />
+
+        <record model="ir.ui.view" id="view_wizard_change_date">
+            <field name="name">view.wizard.change.date</field>
+            <field name="model">change.date.4013.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Cambio de Fecha 4013">
+                    <header>
+                        <p class="oe_grey">
+                            Seleccione la fecha a modificar en los registros seleccionados.
+                        </p>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date_doc" string="Fecha"/>
+                            </group>
+                        </group>
+
+                        <p class="text-danger text-bold text-center">
+                            Recuerde volver a cambiar las fechas después de imprimir las etiquetas 4013.
+                        </p>
+                    </sheet>
+                    <footer>
+                        <button string="Aceptar" name="change_date" confirm="¿Deseas cambiar la fecha?" type="object" class="oe_highlight"/>
+                        o
+                        <button string="Descartar" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="x_mrp_production_jc_view_form">
+            <field name="name">x_mrp_production_jc_view_form</field>
+            <field name="model">prodigia.mrp.production.jc</field>
+            <field name="inherit_id" ref="prodigia_mrp_production_jc.mrp_production_jc_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="%(jc_action_execute.wizard_change_date_4013_action)d" string="Cambiar fechas 4013" type="action" class="btn-danger" invisible="1" groups="jc_action_execute.group_change_sacrificing_date"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
